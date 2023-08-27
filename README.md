@@ -1,0 +1,2 @@
+# kriv-lang
+simple interpreter
