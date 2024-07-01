@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "Lexer/Token.hpp"
-#include "Parser/Node.hpp"
+#include "Token.hpp"
+#include "Node.hpp"
 
 class Parser {
 private:
@@ -14,10 +14,10 @@ private:
     Token currentToken();
     Token currentTokenAndAdvance();
     Token nextToken();
-    void expectToken(TokenType type, std::string &err);
+    void expectToken(TokenType type, const std::string &err);
     
 public:
-    Parser(std::vector<Token> tokens);
+    Parser(const std::vector<Token> &tokens);
 
     Node* parse();
     Node* parse_expr();

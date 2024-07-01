@@ -7,9 +7,9 @@
 #include <map>
 #include <vector>
 
-#include "Lexer/Token.hpp"
-#include "Parser/Node.hpp"
-#include "Interpreter/RuntimeVal.hpp"
+#include "Token.hpp"
+#include "Node.hpp"
+#include "RuntimeVal.hpp"
 
 
 
@@ -28,7 +28,7 @@ private:
 public:
     std::map<std::string, RuntimeVal*> variables;
 
-    void run(std::string &filePath);
+    void run(const std::string &filePath);
 };
 
 #endif

@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Parser/Parser.hpp"
-#include "Error/ErrorHandler.hpp"
+#include "Parser.hpp"
+#include "ErrorHandler.hpp"
 
-Parser::Parser(std::vector<Token> tokens) {
+Parser::Parser(const std::vector<Token> &tokens) {
     this->tokens = tokens;
 }
 
@@ -32,7 +32,7 @@ Token Parser::nextToken() {
 
 
 
-void Parser::expectToken(TokenType type, std::string &err) {
+void Parser::expectToken(TokenType type, const std::string &err) {
     if(currentTokenAndAdvance().type != type) {
         ErrorHandler::handleError(new SyntaxError(err));
     }
@@ -82,7 +82,7 @@ Node* Parser::parse_if_expr() {
     Node *condExpr = parse_compare_expr();
     StmtsNode *ifStmts = new StmtsNode();
 
-    expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
+    // expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
 
     while(currentToken().type != TokenType::RBRACE && currentToken().type != TokenType::EOT) {
         if(currentToken().type == TokenType::EOL) {
@@ -91,7 +91,7 @@ Node* Parser::parse_if_expr() {
         }
         ifStmts->stmts.emplace_back(parse_expr());
     }
-    expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
+    // expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
 
     while(currentToken().type == TokenType::EOL) {
         currentTokenAndAdvance();
@@ -103,7 +103,7 @@ Node* Parser::parse_if_expr() {
 
     StmtsNode *elseStmts = new StmtsNode();
     currentTokenAndAdvance();
-    expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
+    // expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
 
     while(currentToken().type != TokenType::RBRACE && currentToken().type != TokenType::EOT) {
         if(currentToken().type == TokenType::EOL) {
@@ -112,7 +112,7 @@ Node* Parser::parse_if_expr() {
         }
         elseStmts->stmts.emplace_back(parse_expr());
     }
-    expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
+    // expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
     return new IfExpr(condExpr, ifStmts, elseStmts);
 }
 
@@ -126,7 +126,7 @@ Node* Parser::parse_while_expr() {
     Node *condExpr = parse_compare_expr();
     StmtsNode *loopStmts = new StmtsNode();
 
-    expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
+    // expectToken(TokenType::LBRACE, std::string("expected \'{\'"));
 
     while(currentToken().type != TokenType::RBRACE && currentToken().type != TokenType::EOT) {
         if(currentToken().type == TokenType::EOL) {
@@ -135,7 +135,7 @@ Node* Parser::parse_while_expr() {
         }
         loopStmts->stmts.emplace_back(parse_expr());
     }
-    expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
+    // expectToken(TokenType::RBRACE, std::string("expected \'}\'"));
     return new WhileExpr(condExpr, loopStmts);
 }
 
@@ -226,12 +226,12 @@ Node* Parser::parse_primary_expr() {
         break;
         case TokenType::LPAREN: {
             Node *value = parse_expr();
-            expectToken(TokenType::RPAREN, std::string("expected closing parenthesis"));
+            // expectToken(TokenType::RPAREN, std::string("expected closing parenthesis"));
             return value;
         }
         break;
         default:
-            ErrorHandler::handleError(new SyntaxError(std::string("Unexpected Token: " + currentToken().toString() + std::to_string(currentTokenIndex))));
+            // ErrorHandler::handleError(new SyntaxError(std::string("Unexpected Token: " + currentToken().toString() + std::to_string(currentTokenIndex))));
             return new Node(NodeType::NODE);
     }
 }

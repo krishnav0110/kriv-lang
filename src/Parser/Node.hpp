@@ -22,7 +22,7 @@ public:
     NodeType type;
 
     Node(NodeType type);
-    virtual std::string toString();
+    virtual std::string toString() const;
     virtual ~Node() {};
 };
 
@@ -32,7 +32,7 @@ class StmtsNode: public Node {
 public:
     std::vector<Node*> stmts;
     StmtsNode();
-    std::string toString() override;
+    std::string toString() const override;
     ~StmtsNode() override;
 };
 
@@ -41,7 +41,7 @@ public:
 class NullLiteral: public Node {
 public:
     NullLiteral();
-    std::string toString() override;
+    std::string toString() const override;
 };
 
 
@@ -49,8 +49,8 @@ public:
 class NumericLiteral: public Node {
 public:
     int value;
-    NumericLiteral(std::string &value);
-    std::string toString() override;
+    NumericLiteral(const std::string &value);
+    std::string toString() const override;
 };
 
 
@@ -58,8 +58,8 @@ public:
 class Identifier: public Node {
 public:
     std::string symbol;
-    Identifier(std::string &symbol);
-    std::string toString() override;
+    Identifier(const std::string &symbol);
+    std::string toString() const override;
 };
 
 
@@ -68,7 +68,7 @@ class Echo: public Node {
 public:
     Node *value;
     Echo(Node *value);
-    std::string toString() override;
+    std::string toString() const override;
     ~Echo() override;
 };
 
@@ -78,8 +78,8 @@ class AssignExpr: public Node {
 public:
     std::string identifier;
     Node *right;
-    AssignExpr(std::string &identifier, Node *right);
-    std::string toString() override;
+    AssignExpr(const std::string &identifier, Node *right);
+    std::string toString() const override;
     ~AssignExpr() override;
 };
 
@@ -89,8 +89,8 @@ class BinaryExpr: public Node {
 public:
     Node *left, *right;
     std::string op;
-    BinaryExpr(Node *left, Node *right, std::string &op);
-    std::string toString() override;
+    BinaryExpr(Node *left, Node *right, const std::string &op);
+    std::string toString() const override;
     ~BinaryExpr() override;
 };
 
@@ -102,7 +102,7 @@ public:
     StmtsNode *ifStmts;
     StmtsNode *elseStmts;
     IfExpr(Node *cond, StmtsNode *ifStmts, StmtsNode *elseStmts);
-    std::string toString() override;
+    std::string toString() const override;
     ~IfExpr() override;
 };
 
@@ -113,7 +113,7 @@ public:
     Node *cond;
     StmtsNode *loopStmts;
     WhileExpr(Node *cond, StmtsNode *loopStmts);
-    std::string toString() override;
+    std::string toString() const override;
     ~WhileExpr() override;
 };
 

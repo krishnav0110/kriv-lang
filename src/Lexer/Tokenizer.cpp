@@ -1,9 +1,9 @@
 #include <fstream>
 #include <sstream>
-#include "Lexer/Tokenizer.hpp"
-#include "Error/ErrorHandler.hpp"
+#include "Tokenizer.hpp"
+#include "ErrorHandler.hpp"
 
-Tokenizer::Tokenizer(std::string &filePath) {
+Tokenizer::Tokenizer(const std::string &filePath) {
     this->filePath = filePath;
 }
 
@@ -148,7 +148,7 @@ void Tokenizer::generateLineTokens() {
 
 
 
-Token Tokenizer::getKeyword(std::string &word) {
+Token Tokenizer::getKeyword(const std::string &word) {
     if(word == "null") {
         return Token{TokenType::NUL};
     }

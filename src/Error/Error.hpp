@@ -5,7 +5,7 @@
 
 class Error {
 public:
-    virtual std::string toString();
+    virtual std::string toString() const;
 };
 
 
@@ -14,8 +14,8 @@ class IllegalCharError: public Error {
 private:
     std::string details;
 public:
-    IllegalCharError(std::string &details);
-    std::string toString() override;
+    IllegalCharError(const std::string &details);
+    std::string toString() const override;
 };
 
 
@@ -24,8 +24,8 @@ class SyntaxError: public Error {
 private:
     std::string details;
 public:
-    SyntaxError(std::string &details);
-    std::string toString() override;
+    SyntaxError(const std::string &details);
+    std::string toString() const override;
 };
 
 #endif

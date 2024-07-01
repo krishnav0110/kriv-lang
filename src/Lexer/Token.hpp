@@ -26,7 +26,7 @@ struct Token {
     TokenType type;
     std::string value;
 
-    std::string toString();
+    std::string toString() const;
 };
 
 #endif

@@ -9,7 +9,7 @@ class RuntimeVal {
 public:
     RuntimeValType type;
     RuntimeVal(RuntimeValType type);
-    virtual std::string toString();
+    virtual std::string toString() const;
 };
 
 
@@ -17,7 +17,7 @@ public:
 class NullVal: public RuntimeVal {
 public:
     NullVal();
-    std::string toString() override;
+    std::string toString() const override;
 };
 
 
@@ -26,7 +26,7 @@ class NumberVal: public RuntimeVal {
 public:
     float value;
     NumberVal(float value);
-    std::string toString() override;
+    std::string toString() const override;
 };
 
 #endif

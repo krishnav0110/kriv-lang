@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "Interpreter/Interpreter.hpp"
-#include "Lexer/Tokenizer.hpp"
-#include "Parser/Parser.hpp"
+#include "Interpreter.hpp"
+#include "Tokenizer.hpp"
+#include "Parser.hpp"
 
-void Interpreter::run(std::string &filePath) {
+void Interpreter::run(const std::string &filePath) {
     Tokenizer tokenizer(filePath);
     std::vector<Token> tokens = tokenizer.generateTokens();
 

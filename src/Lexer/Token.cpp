@@ -1,6 +1,6 @@
-#include "Lexer/Token.hpp"
+#include "Token.hpp"
 
-std::string Token::toString() {
+std::string Token::toString() const {
     std::string strValue = "";
     if(type == TokenType::EOL) {
         strValue += "EOL";

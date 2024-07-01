@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "Lexer/Token.hpp"
+#include "Token.hpp"
 
 class Tokenizer {
 private:
@@ -18,12 +18,12 @@ private:
     std::string currentCharAndAdvance();
     std::string nextChar();
 
-    Token getKeyword(std::string &word);
+    Token getKeyword(const std::string &word);
 
     void generateLineTokens();
 
 public:
-    Tokenizer(std::string &filePath);
+    Tokenizer(const std::string &filePath);
     std::vector<Token> generateTokens();
 };
 

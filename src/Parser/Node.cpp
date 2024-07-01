@@ -1,9 +1,9 @@
-#include "Parser/Node.hpp"
+#include "Node.hpp"
 
 Node::Node(NodeType type) {
     this->type = type;
 }
-std::string Node::toString() {
+std::string Node::toString() const {
     return "node";
 }
 
@@ -12,7 +12,7 @@ std::string Node::toString() {
 
 
 StmtsNode::StmtsNode(): Node(NodeType::STMTS) {}
-std::string StmtsNode::toString() {
+std::string StmtsNode::toString() const {
     std::string strValue;
     for(Node *stmt: stmts) {
         strValue += stmt->toString() + "\n";
@@ -30,7 +30,7 @@ StmtsNode::~StmtsNode() {
 
 
 NullLiteral::NullLiteral(): Node(NodeType::NULL_LITERAL) {}
-std::string NullLiteral::toString() {
+std::string NullLiteral::toString() const {
     return "null";
 }
 
@@ -38,10 +38,10 @@ std::string NullLiteral::toString() {
 
 
 
-NumericLiteral::NumericLiteral(std::string &value): Node(NodeType::NUMERIC_LITERAL) {
+NumericLiteral::NumericLiteral(const std::string &value): Node(NodeType::NUMERIC_LITERAL) {
     this->value = std::stoi(value);
 }
-std::string NumericLiteral::toString() {
+std::string NumericLiteral::toString() const {
     return std::to_string(value);
 }
 
@@ -49,10 +49,10 @@ std::string NumericLiteral::toString() {
 
 
 
-Identifier::Identifier(std::string &symbol): Node(NodeType::IDENTIFIER) {
+Identifier::Identifier(const std::string &symbol): Node(NodeType::IDENTIFIER) {
     this->symbol = symbol;
 }
-std::string Identifier::toString() {
+std::string Identifier::toString() const {
     return symbol;
 }
 
@@ -63,7 +63,7 @@ std::string Identifier::toString() {
 Echo::Echo(Node *value): Node(NodeType::ECHO_EXPR) {
     this->value = value;
 }
-std::string Echo::toString() {
+std::string Echo::toString() const {
     return "echo: " + value->toString();
 }
 Echo::~Echo() {
@@ -74,11 +74,11 @@ Echo::~Echo() {
 
 
 
-AssignExpr::AssignExpr(std::string &identifier, Node *right): Node(NodeType::ASSIGN_EXPR) {
+AssignExpr::AssignExpr(const std::string &identifier, Node *right): Node(NodeType::ASSIGN_EXPR) {
     this->identifier = identifier;
     this->right = right;
 }
-std::string AssignExpr::toString() {
+std::string AssignExpr::toString() const {
     return identifier + "=" + right->toString();
 }
 AssignExpr::~AssignExpr() {
@@ -89,12 +89,12 @@ AssignExpr::~AssignExpr() {
 
 
 
-BinaryExpr::BinaryExpr(Node *left, Node *right, std::string &op): Node(NodeType::BINARY_EXPR) {
+BinaryExpr::BinaryExpr(Node *left, Node *right, const std::string &op): Node(NodeType::BINARY_EXPR) {
     this->left = left;
     this->right = right;
     this->op = op;
 }
-std::string BinaryExpr::toString() {
+std::string BinaryExpr::toString() const {
     return "(" + left->toString() + op + right->toString() + ")";
 }
 BinaryExpr::~BinaryExpr() {
@@ -111,7 +111,7 @@ IfExpr::IfExpr(Node *cond, StmtsNode *ifStmts, StmtsNode *elseStmts): Node(NodeT
     this->ifStmts = ifStmts;
     this->elseStmts = elseStmts;
 }
-std::string IfExpr::toString() {
+std::string IfExpr::toString() const {
     std::string strValue = "if " + cond->toString() + " {\n";
     for(Node *stmt: ifStmts->stmts) {
         strValue += "\t" + stmt->toString() + "\n";
@@ -141,7 +141,7 @@ WhileExpr::WhileExpr(Node *cond, StmtsNode *loopStmts): Node(NodeType::WHILE_EXP
     this->cond = cond;
     this->loopStmts = loopStmts;
 }
-std::string WhileExpr::toString() {
+std::string WhileExpr::toString() const {
     std::string strValue = "while " + cond->toString() + " {\n";
     for(Node *stmt: loopStmts->stmts) {
         strValue += "\t" + stmt->toString() + "\n";

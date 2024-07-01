@@ -1,4 +1,4 @@
-#include "Error/Error.hpp"
+#include "Error.hpp"
 
 class ErrorHandler {
 public:
